@@ -53,7 +53,7 @@
                 <label>Product Image</label>
                 @if(isset($product) && $product->image)
                     <div style="margin-bottom:0.5rem;">
-                        <img src="{{ asset('storage/' . $product->image) }}" style="height:80px;border-radius:6px;">
+                        <img src="{{ asset($product->image) }}" style="height:80px;border-radius:6px;">
                     </div>
                 @endif
                 <input type="file" name="image" class="form-control" accept="image/jpeg,image/png,image/webp">

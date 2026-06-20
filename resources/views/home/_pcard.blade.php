@@ -24,7 +24,7 @@
     {{-- Image --}}
     <div class="pcard-img">
         @if($product->image)
-            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+            <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
         @else
             <div class="no-img">{{ optional($product->category)->icon ?? '📦' }}</div>
         @endif

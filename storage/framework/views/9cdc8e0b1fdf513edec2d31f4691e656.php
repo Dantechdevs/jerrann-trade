@@ -1,7 +1,6 @@
-@extends('layouts.app')
-@section('title', $product->name . ' – Jerann Traders')
+<?php $__env->startSection('title', $product->name . ' – Jerann Traders'); ?>
 
-@section('styles')
+<?php $__env->startSection('styles'); ?>
 <style>
     .container { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
 
@@ -208,20 +207,20 @@
     .related-old { font-size: 0.72rem; color: #bbb; text-decoration: line-through; }
     .related-price { font-size: 0.95rem; font-weight: 800; color: #1565c0; }
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
-        <a href="{{ route('home') }}">Home</a>
+        <a href="<?php echo e(route('home')); ?>">Home</a>
         <span class="breadcrumb-sep">/</span>
-        @if($product->category)
-        <a href="{{ route('products.index', ['category'=>$product->category->slug]) }}">{{ $product->category->name }}</a>
+        <?php if($product->category): ?>
+        <a href="<?php echo e(route('products.index', ['category'=>$product->category->slug])); ?>"><?php echo e($product->category->name); ?></a>
         <span class="breadcrumb-sep">/</span>
-        @endif
-        <span style="color:#111;font-weight:600;">{{ $product->name }}</span>
+        <?php endif; ?>
+        <span style="color:#111;font-weight:600;"><?php echo e($product->name); ?></span>
     </div>
 
     <!-- Product Detail -->
@@ -230,93 +229,95 @@
         <!-- Image col -->
         <div>
             <div class="product-img-main">
-                @if($product->compare_price && $product->compare_price > $product->price)
+                <?php if($product->compare_price && $product->compare_price > $product->price): ?>
                     <div class="product-discount-badge">
-                        -{{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}%
+                        -<?php echo e(round((($product->compare_price - $product->price) / $product->compare_price) * 100)); ?>%
                     </div>
-                @endif
-                @if($product->image)
-                    <img src="{{ Str::startsWith($product->image,'images/') ? asset($product->image) : asset('storage/'.$product->image) }}"
-                         alt="{{ $product->name }}" id="mainImg">
-                @else
-                    <div class="no-img">{{ optional($product->category)->icon ?? '📦' }}</div>
-                @endif
+                <?php endif; ?>
+                <?php if($product->image): ?>
+                    <img src="<?php echo e(Str::startsWith($product->image,'images/') ? asset($product->image) : asset('storage/'.$product->image)); ?>"
+                         alt="<?php echo e($product->name); ?>" id="mainImg">
+                <?php else: ?>
+                    <div class="no-img"><?php echo e(optional($product->category)->icon ?? '📦'); ?></div>
+                <?php endif; ?>
                 <button class="product-img-zoom" title="Zoom">⛶</button>
             </div>
             <!-- Thumbnail row (shows same image as placeholder for more images) -->
-            @if($product->image)
+            <?php if($product->image): ?>
             <div class="thumb-row">
                 <div class="thumb active">
-                    <img src="{{ Str::startsWith($product->image,'images/') ? asset($product->image) : asset('storage/'.$product->image) }}" alt="">
+                    <img src="<?php echo e(Str::startsWith($product->image,'images/') ? asset($product->image) : asset('storage/'.$product->image)); ?>" alt="">
                 </div>
             </div>
-            @endif
+            <?php endif; ?>
         </div>
 
         <!-- Info col -->
         <div>
             <div class="product-nav">
                 <a href="#">‹</a>
-                <a href="{{ route('products.index') }}">⊞</a>
+                <a href="<?php echo e(route('products.index')); ?>">⊞</a>
                 <a href="#">›</a>
             </div>
 
-            <h1 class="product-title">{{ $product->name }}</h1>
+            <h1 class="product-title"><?php echo e($product->name); ?></h1>
 
             <div class="product-price-row">
-                @if($product->compare_price && $product->compare_price > $product->price)
-                    <span class="product-old-price">KSh {{ number_format($product->compare_price) }}</span>
-                @endif
-                <span class="product-price">KSh {{ number_format($product->price) }}</span>
+                <?php if($product->compare_price && $product->compare_price > $product->price): ?>
+                    <span class="product-old-price">KSh <?php echo e(number_format($product->compare_price)); ?></span>
+                <?php endif; ?>
+                <span class="product-price">KSh <?php echo e(number_format($product->price)); ?></span>
             </div>
 
-            @if($product->compare_price && $product->compare_price > $product->price)
+            <?php if($product->compare_price && $product->compare_price > $product->price): ?>
             <div class="save-badge">
-                KSh {{ number_format($product->price) }} &nbsp;|&nbsp;
-                Save: KSh {{ number_format($product->compare_price - $product->price) }}
-                ({{ round((($product->compare_price - $product->price) / $product->compare_price) * 100) }}%)
+                KSh <?php echo e(number_format($product->price)); ?> &nbsp;|&nbsp;
+                Save: KSh <?php echo e(number_format($product->compare_price - $product->price)); ?>
+
+                (<?php echo e(round((($product->compare_price - $product->price) / $product->compare_price) * 100)); ?>%)
             </div>
-            @endif
+            <?php endif; ?>
 
             <div class="product-desc-short">
-                {!! nl2br(e($product->description ?? 'Contact us for more details about this product.')) !!}
+                <?php echo nl2br(e($product->description ?? 'Contact us for more details about this product.')); ?>
+
             </div>
 
-            @if($product->isInStock())
-                @auth
-                <form action="{{ route('cart.add') }}" method="POST">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{ $product->id }}">
-                    <div class="qty-label">{{ $product->name }} quantity</div>
+            <?php if($product->isInStock()): ?>
+                <?php if(auth()->guard()->check()): ?>
+                <form action="<?php echo e(route('cart.add')); ?>" method="POST">
+                    <?php echo csrf_field(); ?>
+                    <input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
+                    <div class="qty-label"><?php echo e($product->name); ?> quantity</div>
                     <div class="qty-row">
                         <div class="qty-control">
                             <button type="button" class="qty-btn" onclick="changeQty(-1)">−</button>
-                            <input type="number" name="quantity" value="1" min="1" max="{{ $product->stock }}" class="qty-input" id="qtyInput">
+                            <input type="number" name="quantity" value="1" min="1" max="<?php echo e($product->stock); ?>" class="qty-input" id="qtyInput">
                             <button type="button" class="qty-btn" onclick="changeQty(1)">+</button>
                         </div>
                         <button type="submit" class="btn-add-cart">Add to cart</button>
-                        <a href="{{ route('checkout.index') }}" class="btn-buy-now">Buy now</a>
+                        <a href="<?php echo e(route('checkout.index')); ?>" class="btn-buy-now">Buy now</a>
                     </div>
                 </form>
-                @else
-                <div class="qty-label">{{ $product->name }} quantity</div>
+                <?php else: ?>
+                <div class="qty-label"><?php echo e($product->name); ?> quantity</div>
                 <div class="qty-row">
                     <div class="qty-control">
                         <button class="qty-btn">−</button>
                         <input type="number" value="1" class="qty-input">
                         <button class="qty-btn">+</button>
                     </div>
-                    <a href="{{ route('login') }}" class="btn-add-cart">Add to cart</a>
-                    <a href="{{ route('login') }}" class="btn-buy-now">Buy now</a>
+                    <a href="<?php echo e(route('login')); ?>" class="btn-add-cart">Add to cart</a>
+                    <a href="<?php echo e(route('login')); ?>" class="btn-buy-now">Buy now</a>
                 </div>
-                @endauth
-            @else
+                <?php endif; ?>
+            <?php else: ?>
                 <div style="padding:0.75rem 1rem;background:#fff3f3;border:1px solid #ffcdd2;border-radius:6px;color:#c62828;font-weight:600;font-size:0.88rem;margin-bottom:1rem;">
                     Out of Stock — Contact us to request this item
                 </div>
-            @endif
+            <?php endif; ?>
 
-            <a href="https://wa.me/254702939491?text=Hi%2C+I%27m+interested+in+{{ urlencode($product->name) }}+at+KSh+{{ number_format($product->price) }}"
+            <a href="https://wa.me/254702939491?text=Hi%2C+I%27m+interested+in+<?php echo e(urlencode($product->name)); ?>+at+KSh+<?php echo e(number_format($product->price)); ?>"
                target="_blank" class="btn-whatsapp">💬 Order On WhatsApp</a>
 
             <div class="product-actions-row">
@@ -327,35 +328,35 @@
             <hr class="product-divider">
 
             <div class="product-meta-table">
-                @if(isset($product->sku) && $product->sku)
+                <?php if(isset($product->sku) && $product->sku): ?>
                 <div class="product-meta-row">
                     <span class="product-meta-label">SKU:</span>
-                    <span class="product-meta-val">{{ $product->sku }}</span>
+                    <span class="product-meta-val"><?php echo e($product->sku); ?></span>
                 </div>
-                @endif
-                @if($product->category)
+                <?php endif; ?>
+                <?php if($product->category): ?>
                 <div class="product-meta-row">
                     <span class="product-meta-label">Categories:</span>
                     <span class="product-meta-val">
-                        <a href="{{ route('products.index', ['category'=>$product->category->slug]) }}">{{ $product->category->name }}</a>
+                        <a href="<?php echo e(route('products.index', ['category'=>$product->category->slug])); ?>"><?php echo e($product->category->name); ?></a>
                     </span>
                 </div>
-                @endif
-                @if($product->brand)
+                <?php endif; ?>
+                <?php if($product->brand): ?>
                 <div class="product-meta-row">
                     <span class="product-meta-label">Tags:</span>
-                    <span class="product-meta-val">{{ $product->brand }}</span>
+                    <span class="product-meta-val"><?php echo e($product->brand); ?></span>
                 </div>
-                @endif
+                <?php endif; ?>
             </div>
 
             <div class="share-row">
                 <span>Share:</span>
-                <a href="https://www.facebook.com/sharer/sharer.php?u={{ urlencode(url()->current()) }}" target="_blank" class="share-icon" style="background:#1877f2;color:#fff;">f</a>
-                <a href="https://twitter.com/intent/tweet?url={{ urlencode(url()->current()) }}" target="_blank" class="share-icon" style="background:#000;color:#fff;">𝕏</a>
-                <a href="https://pinterest.com/pin/create/button/?url={{ urlencode(url()->current()) }}" target="_blank" class="share-icon" style="background:#e60023;color:#fff;">P</a>
-                <a href="https://www.linkedin.com/shareArticle?url={{ urlencode(url()->current()) }}" target="_blank" class="share-icon" style="background:#0077b5;color:#fff;">in</a>
-                <a href="https://t.me/share/url?url={{ urlencode(url()->current()) }}" target="_blank" class="share-icon" style="background:#0088cc;color:#fff;">✈</a>
+                <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo e(urlencode(url()->current())); ?>" target="_blank" class="share-icon" style="background:#1877f2;color:#fff;">f</a>
+                <a href="https://twitter.com/intent/tweet?url=<?php echo e(urlencode(url()->current())); ?>" target="_blank" class="share-icon" style="background:#000;color:#fff;">𝕏</a>
+                <a href="https://pinterest.com/pin/create/button/?url=<?php echo e(urlencode(url()->current())); ?>" target="_blank" class="share-icon" style="background:#e60023;color:#fff;">P</a>
+                <a href="https://www.linkedin.com/shareArticle?url=<?php echo e(urlencode(url()->current())); ?>" target="_blank" class="share-icon" style="background:#0077b5;color:#fff;">in</a>
+                <a href="https://t.me/share/url?url=<?php echo e(urlencode(url()->current())); ?>" target="_blank" class="share-icon" style="background:#0088cc;color:#fff;">✈</a>
             </div>
         </div>
     </div>
@@ -374,27 +375,28 @@
         <div class="desc-section">
             <h3>Description</h3>
             <p style="font-size:0.9rem;color:#444;line-height:1.8;margin-bottom:1.2rem;">
-                {{ $product->description ?? 'No description available for this product.' }}
+                <?php echo e($product->description ?? 'No description available for this product.'); ?>
+
             </p>
         </div>
-        @if($product->category && str_contains(strtolower($product->category->name ?? ''), 'toner'))
+        <?php if($product->category && str_contains(strtolower($product->category->name ?? ''), 'toner')): ?>
         <div class="desc-section">
             <h3>Compatible Printers</h3>
             <ul>
-                <li>{{ $product->brand ?? 'Compatible' }} LaserJet Enterprise 500 color MFP M575dn</li>
-                <li>{{ $product->brand ?? 'Compatible' }} LaserJet Enterprise 500 color MFP M575f</li>
-                <li>{{ $product->brand ?? 'Compatible' }} LaserJet Enterprise 500 color Printer M551dn</li>
-                <li>{{ $product->brand ?? 'Compatible' }} LaserJet Enterprise 500 color Printer M551n</li>
-                <li>{{ $product->brand ?? 'Compatible' }} LaserJet Enterprise 500 color Printer M551xh</li>
+                <li><?php echo e($product->brand ?? 'Compatible'); ?> LaserJet Enterprise 500 color MFP M575dn</li>
+                <li><?php echo e($product->brand ?? 'Compatible'); ?> LaserJet Enterprise 500 color MFP M575f</li>
+                <li><?php echo e($product->brand ?? 'Compatible'); ?> LaserJet Enterprise 500 color Printer M551dn</li>
+                <li><?php echo e($product->brand ?? 'Compatible'); ?> LaserJet Enterprise 500 color Printer M551n</li>
+                <li><?php echo e($product->brand ?? 'Compatible'); ?> LaserJet Enterprise 500 color Printer M551xh</li>
             </ul>
         </div>
-        @endif
+        <?php endif; ?>
         <div class="desc-section">
             <h3>Additional Information</h3>
             <table class="shipping-table" style="max-width:400px;">
-                <tr><th>Brand</th><td>{{ $product->brand ?? 'N/A' }}</td></tr>
-                <tr><th>Category</th><td>{{ optional($product->category)->name ?? 'N/A' }}</td></tr>
-                <tr><th>Stock</th><td>{{ $product->stock }} units</td></tr>
+                <tr><th>Brand</th><td><?php echo e($product->brand ?? 'N/A'); ?></td></tr>
+                <tr><th>Category</th><td><?php echo e(optional($product->category)->name ?? 'N/A'); ?></td></tr>
+                <tr><th>Stock</th><td><?php echo e($product->stock); ?> units</td></tr>
                 <tr><th>Condition</th><td>Brand New</td></tr>
                 <tr><th>Warranty</th><td>6 months</td></tr>
             </table>
@@ -434,43 +436,43 @@
             </div>
             <button class="write-review-btn">Write a review</button>
         </div>
-        <div class="no-reviews">Be the first to review "{{ $product->name }}"</div>
+        <div class="no-reviews">Be the first to review "<?php echo e($product->name); ?>"</div>
     </div>
 
     <!-- Related Products -->
-    @if($related->isNotEmpty())
+    <?php if($related->isNotEmpty()): ?>
     <div class="related-section">
         <div class="section-title">Related Products</div>
         <div class="section-underline"></div>
         <div class="related-grid">
-            @foreach($related->take(4) as $r)
+            <?php $__currentLoopData = $related->take(4); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $r): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
             <div class="related-card">
-                <a href="{{ route('products.show', $r) }}" style="text-decoration:none;color:inherit;">
+                <a href="<?php echo e(route('products.show', $r)); ?>" style="text-decoration:none;color:inherit;">
                     <span class="related-compare">Compare</span>
                     <div class="related-img">
-                        @if($r->image)
-                            <img src="{{ Str::startsWith($r->image,'images/') ? asset($r->image) : asset('storage/'.$r->image) }}" alt="{{ $r->name }}">
-                        @else
-                            <div class="icon">{{ optional($r->category)->icon ?? '📦' }}</div>
-                        @endif
+                        <?php if($r->image): ?>
+                            <img src="<?php echo e(Str::startsWith($r->image,'images/') ? asset($r->image) : asset('storage/'.$r->image)); ?>" alt="<?php echo e($r->name); ?>">
+                        <?php else: ?>
+                            <div class="icon"><?php echo e(optional($r->category)->icon ?? '📦'); ?></div>
+                        <?php endif; ?>
                     </div>
-                    <div class="related-name">{{ Str::limit($r->name, 55) }}</div>
-                    <div class="related-cat">{{ optional($r->category)->name }}</div>
-                    @if($r->compare_price && $r->compare_price > $r->price)
-                        <div class="related-old">KSh {{ number_format($r->compare_price) }}</div>
-                    @endif
-                    <div class="related-price">KSh {{ number_format($r->price) }}</div>
+                    <div class="related-name"><?php echo e(Str::limit($r->name, 55)); ?></div>
+                    <div class="related-cat"><?php echo e(optional($r->category)->name); ?></div>
+                    <?php if($r->compare_price && $r->compare_price > $r->price): ?>
+                        <div class="related-old">KSh <?php echo e(number_format($r->compare_price)); ?></div>
+                    <?php endif; ?>
+                    <div class="related-price">KSh <?php echo e(number_format($r->price)); ?></div>
                 </a>
             </div>
-            @endforeach
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         </div>
     </div>
-    @endif
+    <?php endif; ?>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('scripts')
+<?php $__env->startSection('scripts'); ?>
 <script>
 function changeQty(delta) {
     const input = document.getElementById('qtyInput');
@@ -488,4 +490,5 @@ function openTab(e, id) {
     e.target.classList.add('active');
 }
 </script>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\xampp\htdocs\jerann-traders\resources\views/products/show.blade.php ENDPATH**/ ?>

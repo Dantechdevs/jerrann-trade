@@ -29,7 +29,7 @@
             <tr>
                 <td>
                     @if($product->image)
-                        <img src="{{ asset('storage/' . $product->image) }}" style="width:48px;height:48px;object-fit:cover;border-radius:6px;">
+                        <img src="{{ asset($product->image) }}" style="width:48px;height:48px;object-fit:cover;border-radius:6px;">
                     @else
                         <span style="font-size:1.8rem;">{{ $product->category->icon ?? '📦' }}</span>
                     @endif

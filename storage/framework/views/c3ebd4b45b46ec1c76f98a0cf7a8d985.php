@@ -24,7 +24,7 @@
     
     <div class="pcard-img">
         <?php if($product->image): ?>
-            <img src="<?php echo e(asset('storage/' . $product->image)); ?>" alt="<?php echo e($product->name); ?>">
+            <img src="<?php echo e(asset($product->image)); ?>" alt="<?php echo e($product->name); ?>">
         <?php else: ?>
             <div class="no-img"><?php echo e(optional($product->category)->icon ?? '📦'); ?></div>
         <?php endif; ?>

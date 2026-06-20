@@ -80,7 +80,7 @@
     <div class="product-card">
         <div class="product-img">
             @if($product->image)
-                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
             @else
                 {{ $product->category->icon ?? '📦' }}
             @endif
