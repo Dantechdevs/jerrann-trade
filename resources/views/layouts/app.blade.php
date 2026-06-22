@@ -28,6 +28,88 @@
             --warning:    #e65100;
         }
 
+        /* ── LAYER 1: Top Bar ── */
+        .topbar {
+            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--cyan) 100%);
+            color: rgba(255,255,255,0.85);
+            font-size: 0.78rem;
+            padding: 0 2rem;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .topbar-left {
+            display: flex;
+            align-items: center;
+        }
+        .topbar-left a {
+            color: rgba(255,255,255,0.82);
+            transition: color 0.2s;
+            padding: 0 1rem;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            line-height: 36px;
+        }
+        .topbar-left a:first-child { padding-left: 0; }
+        .topbar-left a:hover { color: #fff; }
+        .topbar-location {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: rgba(255,255,255,0.95);
+            font-weight: 600;
+            padding: 0 1rem;
+            border-left: 1px solid rgba(255,255,255,0.2);
+        }
+        .topbar-right {
+            display: flex;
+            align-items: center;
+        }
+        .topbar-right a {
+            color: rgba(255,255,255,0.82);
+            transition: color 0.2s;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            padding: 0 0.9rem;
+            line-height: 36px;
+            font-size: 0.78rem;
+        }
+        .topbar-right a:hover { color: #fff; }
+        .topbar-right .logout-btn {
+            background: none;
+            border: none;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.82);
+            cursor: pointer;
+            font-size: 0.78rem;
+            padding: 0 0.9rem;
+            height: 36px;
+            transition: color 0.2s;
+        }
+        .topbar-right .logout-btn:hover { color: #fff; }
+        .topbar-social {
+            display: flex;
+            align-items: center;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            padding-left: 0.4rem;
+            gap: 2px;
+        }
+        .topbar-social a {
+            border: none !important;
+            padding: 0 0.35rem !important;
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.75);
+            line-height: 36px;
+            width: 26px;
+            text-align: center;
+            border-radius: 4px;
+            transition: background 0.2s, color 0.2s;
+        }
+        .topbar-social a:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.15);
+        }
+
         /* ── LAYER 2: Main Navbar ── */
         .navbar {
             background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--cyan) 100%);
@@ -45,12 +127,12 @@
         .navbar-brand .brand-text { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; }
         .navbar-brand .brand-sub  { font-size: 0.68rem; color: rgba(255,255,255,0.75); letter-spacing: 1.5px; text-transform: uppercase; }
 
-        .nav-links { display: flex; align-items: center; gap: 0.15rem; }
+        .nav-links { display: flex; align-items: center; gap: 0.1rem; }
         .nav-link {
             color: rgba(255,255,255,0.88);
-            padding: 0.45rem 1rem;
+            padding: 0.45rem 0.85rem;
             border-radius: 6px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: background 0.2s, color 0.2s;
             white-space: nowrap;
@@ -62,16 +144,30 @@
         }
         .nav-link-highlight:hover { background: rgba(255,213,79,0.15); color: #ffd54f; }
 
-        .nav-badge {
-            background: var(--accent);
-            color: #fff;
-            font-size: 0.6rem;
-            font-weight: 700;
-            border-radius: 10px;
-            padding: 1px 5px;
-            margin-left: 3px;
-            vertical-align: top;
+        .nav-social {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-left: 6px;
+            padding-left: 10px;
+            border-left: 1px solid rgba(255,255,255,0.25);
         }
+        .nav-social a {
+            color: rgba(255,255,255,0.75);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            transition: background 0.2s, color 0.2s;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+        }
+        .nav-social a:hover { background: rgba(255,255,255,0.25); color: #fff; }
 
         /* ── LAYER 3: Search Bar ── */
         .searchbar {
@@ -92,7 +188,6 @@
             border-radius: 30px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            border: none;
         }
         .searchbar-input {
             flex: 1;
@@ -123,13 +218,12 @@
             cursor: pointer;
             transition: background 0.2s;
             font-weight: 700;
-            letter-spacing: 0.5px;
         }
         .searchbar-btn:hover { background: #e65100; }
         .searchbar-right {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-left: auto;
         }
         .searchbar-icon-group {
@@ -186,6 +280,7 @@
         .searchbar-support .support-label { font-size: 0.62rem; color: #80deea; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
         .searchbar-support .support-phone { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
 
+        /* ── Buttons ── */
         .btn {
             display: inline-block;
             padding: 0.5rem 1.2rem;
@@ -259,56 +354,6 @@
         .badge-primary  { background: #e8eaf6; color: #283593; }
         .badge-secondary{ background: #f5f5f5; color: #616161; }
 
-        /* ── LAYER 1: Top Bar ── */
-        .topbar {
-            background: #111;
-            color: rgba(255,255,255,0.75);
-            font-size: 0.78rem;
-            padding: 0 2rem;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #222;
-        }
-        .topbar-left {
-            display: flex;
-            align-items: center;
-        }
-        .topbar-left a, .topbar-right a {
-            color: rgba(255,255,255,0.7);
-            transition: color 0.2s;
-            padding: 0 1rem;
-            border-right: 1px solid #333;
-            line-height: 36px;
-        }
-        .topbar-left a:first-child { padding-left: 0; }
-        .topbar-left a:hover, .topbar-right a:hover { color: #fff; }
-        .topbar-location {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: rgba(255,255,255,0.9);
-            font-weight: 600;
-            padding: 0 1rem;
-            border-left: 1px solid #333;
-        }
-        .topbar-right {
-            display: flex;
-            align-items: center;
-        }
-        .topbar-right a {
-            border-right: none;
-            border-left: 1px solid #333;
-            padding: 0 1rem;
-            line-height: 36px;
-        }
-        .topbar-divider {
-            width: 1px;
-            height: 14px;
-            background: #333;
-        }
-
         /* ── Footer ── */
         .footer-features {
             background: var(--blue);
@@ -326,22 +371,9 @@
             color: #fff;
             max-width: 200px;
         }
-        .footer-feature-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-            opacity: 0.9;
-        }
-        .footer-feature-title {
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.2rem;
-        }
-        .footer-feature-sub {
-            font-size: 0.78rem;
-            opacity: 0.8;
-        }
+        .footer-feature-icon { font-size: 2rem; flex-shrink: 0; opacity: 0.9; }
+        .footer-feature-title { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+        .footer-feature-sub   { font-size: 0.78rem; opacity: 0.8; }
 
         .footer-main {
             background: #fff;
@@ -361,11 +393,7 @@
         }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 0.55rem; }
-        .footer-col ul li a {
-            font-size: 0.83rem;
-            color: #555;
-            transition: color 0.2s;
-        }
+        .footer-col ul li a { font-size: 0.83rem; color: #555; transition: color 0.2s; }
         .footer-col ul li a:hover { color: var(--blue); }
 
         .footer-mpesa {
@@ -380,11 +408,7 @@
             gap: 6px;
             margin-bottom: 0.5rem;
         }
-        .footer-till {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 1.2rem;
-        }
+        .footer-till { display: flex; gap: 4px; margin-bottom: 1.2rem; }
         .footer-till span {
             border: 2px solid #333;
             border-radius: 4px;
@@ -397,20 +421,8 @@
             font-size: 1rem;
             color: #111;
         }
-        .footer-contact-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 0.75rem;
-        }
-        .footer-contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-size: 0.83rem;
-            color: #444;
-            margin-bottom: 0.5rem;
-        }
+        .footer-contact-title { font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 0.75rem; }
+        .footer-contact-item  { display: flex; align-items: flex-start; gap: 8px; font-size: 0.83rem; color: #444; margin-bottom: 0.5rem; }
         .footer-contact-item strong { color: #111; }
 
         .footer-bottom {
@@ -435,16 +447,25 @@
         <div class="topbar-location">📍 Gaberon Plaza, NRB CBD, 4th Floor Shop No. A19</div>
     </div>
     <div class="topbar-right">
+        <a href="#">🔁&nbsp;<sup style="font-size:0.65rem;">0</sup>&nbsp;Compare</a>
+        <a href="#">♡&nbsp;<sup style="font-size:0.65rem;">0</sup>&nbsp;Wishlist</a>
         @auth
             <a href="{{ route('orders.index') }}">My Orders</a>
             <form action="{{ route('logout') }}" method="POST" style="display:inline;">
                 @csrf
-                <button type="submit" style="background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:0.78rem;padding:0 1rem;border-left:1px solid #333;height:36px;">Logout</button>
+                <button type="submit" class="logout-btn">Logout</button>
             </form>
         @else
-            <a href="{{ route('login') }}">Login</a>
-            <a href="{{ route('register') }}">Register</a>
+            <a href="{{ route('login') }}">Login / Register</a>
         @endauth
+        <!-- Social Icons -->
+        <div class="topbar-social">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="X / Twitter">&#x1D54F;</a>
+            <a href="#" title="Pinterest">P</a>
+            <a href="#" title="LinkedIn">in</a>
+            <a href="#" title="Telegram">&#x2708;</a>
+        </div>
     </div>
 </div>
 
@@ -461,10 +482,21 @@
     <div class="nav-links">
         <a href="{{ route('home') }}"           class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
         <a href="{{ route('products.index') }}" class="nav-link {{ request()->routeIs('products*') ? 'active' : '' }}">Shop</a>
-        <a href="{{ route('repairs.create') }}" class="nav-link {{ request()->routeIs('repairs*') ? 'active' : '' }}">About Us</a>
+        <a href="{{ route('repairs.create') }}" class="nav-link {{ request()->routeIs('about*') ? 'active' : '' }}">About Us</a>
+        <a href="#"                             class="nav-link {{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a>
         <a href="{{ route('repairs.create') }}" class="nav-link">Contact Us</a>
         <a href="{{ route('repairs.create') }}" class="nav-link nav-link-highlight">Request For Quotation</a>
         <a href="{{ route('repairs.create') }}" class="nav-link">Request For Service</a>
+
+        <!-- Social Icons inline after nav -->
+        <div class="nav-social">
+            <a href="#" title="Facebook">f</a>
+            <a href="#" title="X">&#x1D54F;</a>
+            <a href="#" title="Pinterest">P</a>
+            <a href="#" title="LinkedIn">in</a>
+            <a href="#" title="Telegram">&#x2708;</a>
+        </div>
+
         @auth
             @if(auth()->user()->isAdmin())
                 <a href="{{ route('admin.dashboard') }}" class="nav-link" style="color:#ffd54f;">⚙ Admin</a>
@@ -500,6 +532,12 @@
             </div>
         </div>
 
+        <!-- Compare -->
+        <a href="#" class="searchbar-icon-group">
+            <div class="icon">🔁<span class="searchbar-count">0</span></div>
+            <span>Compare</span>
+        </a>
+
         <!-- Wishlist -->
         <a href="#" class="searchbar-icon-group">
             <div class="icon">♡<span class="searchbar-count">0</span></div>
@@ -507,14 +545,24 @@
         </a>
 
         <!-- Cart -->
-        @php $cartCount = auth()->check() ? \App\Models\CartItem::where('user_id', auth()->id())->sum('quantity') : 0; @endphp
+        @php
+            $cartCount = auth()->check()
+                ? \App\Models\CartItem::where('user_id', auth()->id())->sum('quantity')
+                : 0;
+            $cartTotal = auth()->check()
+                ? \App\Models\CartItem::where('user_id', auth()->id())
+                    ->join('products','cart_items.product_id','=','products.id')
+                    ->sum(\Illuminate\Support\Facades\DB::raw('cart_items.quantity * products.price'))
+                : 0;
+        @endphp
         <a href="{{ auth()->check() ? route('cart.index') : route('login') }}" class="searchbar-icon-group">
             <div class="icon">🛒<span class="searchbar-count">{{ $cartCount }}</span></div>
-            <span>KSH {{ auth()->check() ? number_format(\App\Models\CartItem::where('user_id', auth()->id())->join('products','cart_items.product_id','=','products.id')->sum(\Illuminate\Support\Facades\DB::raw('cart_items.quantity * products.price'))) : '0' }}</span>
+            <span>KSH {{ number_format($cartTotal) }}</span>
         </a>
     </div>
 </div>
 
+<!-- ══ Page Content ══ -->
 <div class="container page-content">
     @if(session('success'))
         <div class="alert alert-success">✅ {{ session('success') }}</div>
