@@ -80,7 +80,9 @@
     <div class="product-card">
         <div class="product-img">
             @if($product->image)
-                <img src="{{ asset($product->image) }}" alt="{{ $product->name }}">
+                <img src="{{ Str::startsWith($product->image, 'images/') ? asset($product->image) : asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+            @else
+                <img src="{{ asset('images/placeholder.png') }}" alt="{{ $product->name }}">
             @else
                 {{ $product->category->icon ?? '📦' }}
             @endif
