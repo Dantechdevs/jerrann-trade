@@ -137,34 +137,65 @@
            LAYER 2: Main Navbar
         ════════════════════════════════════ */
         .navbar {
-            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--cyan) 100%);
+            background: #ffffff;
             padding: 0 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             height: 72px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            border-bottom: 1px solid #e8e8e8;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
         }
         .navbar-brand {
-            display: flex; align-items: center; gap: 12px; color: var(--white); flex-shrink: 0;
+            display: flex; align-items: center; gap: 12px; color: var(--text); flex-shrink: 0;
         }
-        .navbar-brand img { height: 48px; width: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); }
-        .navbar-brand .brand-text { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; }
-        .navbar-brand .brand-sub  { font-size: 0.68rem; color: rgba(255,255,255,0.75); letter-spacing: 1.5px; text-transform: uppercase; }
+        .navbar-brand img { height: 48px; width: 48px; border-radius: 50%; border: 2px solid #e0e0e0; }
+        .navbar-brand .brand-text { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; color: var(--blue-dark); }
+        .navbar-brand .brand-sub  { font-size: 0.68rem; color: #888; letter-spacing: 1.5px; text-transform: uppercase; }
 
-        .nav-links { display: flex; align-items: center; gap: 0.1rem; }
+        .nav-links { display: flex; align-items: center; gap: 0.05rem; }
         .nav-link {
-            color: rgba(255,255,255,0.88);
+            color: #333;
             padding: 0.45rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: background 0.2s, color 0.2s;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            transition: color 0.2s;
             white-space: nowrap;
         }
-        .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.18); color: #fff; }
-        .nav-link-highlight { color: #ffd54f; font-weight: 700; }
-        .nav-link-highlight:hover { background: rgba(255,213,79,0.15); color: #ffd54f; }
+        .nav-link:hover { color: var(--blue); }
+        .nav-link.active { color: var(--blue); }
+        .nav-link-highlight { color: var(--blue); font-weight: 700; }
+        .nav-link-highlight:hover { color: var(--blue-dark); }
+        .nav-link-divider {
+            width: 1px;
+            height: 16px;
+            background: #ccc;
+            margin: 0 4px;
+        }
+        .nav-social {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-left: 8px;
+            padding-left: 12px;
+            border-left: 1px solid #ddd;
+        }
+        .nav-social a {
+            color: #555;
+            font-size: 0.82rem;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color 0.2s, color 0.2s, background 0.2s;
+        }
+        .nav-social a:hover { border-color: var(--blue); color: var(--blue); background: #f0f4ff; }
 
 
 
@@ -391,14 +422,7 @@
                 <i class="fa-regular fa-user"></i> Login / Register
             </a>
         @endauth
-        <!-- Social Icons -->
-        <div class="topbar-social">
-            <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="#" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="#" title="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
-            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-        </div>
+
     </div>
 </div>
 
@@ -421,7 +445,17 @@
         <a href="#"                             class="nav-link {{ request()->routeIs('blog*') ? 'active' : '' }}">Blog</a>
         <a href="{{ route('repairs.create') }}" class="nav-link">Contact Us</a>
         <a href="{{ route('repairs.create') }}" class="nav-link nav-link-highlight">Request For Quotation</a>
+        <div class="nav-link-divider"></div>
         <a href="{{ route('repairs.create') }}" class="nav-link">Request For Service</a>
+
+        <!-- Social Icons -->
+        <div class="nav-social">
+            <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" title="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
 
         @auth
             @if(auth()->user()->isAdmin())
