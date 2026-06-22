@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
     <title><?php echo $__env->yieldContent('title', 'Jerann Traders'); ?> – Printers, Laptops & Repair Services</title>
+
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <style>
         /* ── Reset & Base ── */
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,7 +32,110 @@
             --warning:    #e65100;
         }
 
-        /* ── LAYER 2: Main Navbar ── */
+        /* ════════════════════════════════════
+           LAYER 1: Top Bar
+        ════════════════════════════════════ */
+        .topbar {
+            background: linear-gradient(135deg, #4a0080 0%, #7b1fa2 60%, #ab47bc 100%);
+            color: rgba(255,255,255,0.85);
+            font-size: 0.78rem;
+            padding: 0 2rem;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+        }
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .topbar-left a {
+            color: rgba(255,255,255,0.82);
+            transition: color 0.2s;
+            padding: 0 1rem;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            line-height: 36px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            height: 100%;
+        }
+        .topbar-left a:first-child { padding-left: 0; }
+        .topbar-left a:hover { color: #fff; }
+        .topbar-location {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: rgba(255,255,255,0.95);
+            font-weight: 600;
+            padding: 0 1rem;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            height: 100%;
+        }
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+        .topbar-right a {
+            color: rgba(255,255,255,0.82);
+            transition: color 0.2s;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            padding: 0 0.9rem;
+            line-height: 36px;
+            font-size: 0.78rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            height: 100%;
+        }
+        .topbar-right a:hover { color: #fff; }
+        .topbar-right .logout-btn {
+            background: none;
+            border: none;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            color: rgba(255,255,255,0.82);
+            cursor: pointer;
+            font-size: 0.78rem;
+            padding: 0 0.9rem;
+            height: 36px;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .topbar-right .logout-btn:hover { color: #fff; }
+        .topbar-social {
+            display: flex;
+            align-items: center;
+            border-left: 1px solid rgba(255,255,255,0.2);
+            padding-left: 0.5rem;
+            gap: 2px;
+            height: 100%;
+        }
+        .topbar-social a {
+            border: none !important;
+            padding: 0 !important;
+            width: 26px;
+            height: 26px;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            border-radius: 4px;
+            color: rgba(255,255,255,0.75);
+            font-size: 0.78rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        .topbar-social a:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.18);
+        }
+
+        /* ════════════════════════════════════
+           LAYER 2: Main Navbar
+        ════════════════════════════════════ */
         .navbar {
             background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--cyan) 100%);
             padding: 0 2rem;
@@ -39,41 +146,31 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .navbar-brand {
-            display: flex; align-items: center; gap: 12px; color: var(--white);
+            display: flex; align-items: center; gap: 12px; color: var(--white); flex-shrink: 0;
         }
         .navbar-brand img { height: 48px; width: 48px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35); }
         .navbar-brand .brand-text { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; line-height: 1.2; }
         .navbar-brand .brand-sub  { font-size: 0.68rem; color: rgba(255,255,255,0.75); letter-spacing: 1.5px; text-transform: uppercase; }
 
-        .nav-links { display: flex; align-items: center; gap: 0.15rem; }
+        .nav-links { display: flex; align-items: center; gap: 0.1rem; }
         .nav-link {
             color: rgba(255,255,255,0.88);
-            padding: 0.45rem 1rem;
+            padding: 0.45rem 0.8rem;
             border-radius: 6px;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             font-weight: 500;
             transition: background 0.2s, color 0.2s;
             white-space: nowrap;
         }
         .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.18); color: #fff; }
-        .nav-link-highlight {
-            color: #ffd54f;
-            font-weight: 700;
-        }
+        .nav-link-highlight { color: #ffd54f; font-weight: 700; }
         .nav-link-highlight:hover { background: rgba(255,213,79,0.15); color: #ffd54f; }
 
-        .nav-badge {
-            background: var(--accent);
-            color: #fff;
-            font-size: 0.6rem;
-            font-weight: 700;
-            border-radius: 10px;
-            padding: 1px 5px;
-            margin-left: 3px;
-            vertical-align: top;
-        }
 
-        /* ── LAYER 3: Search Bar ── */
+
+        /* ════════════════════════════════════
+           LAYER 3: Search Bar
+        ════════════════════════════════════ */
         .searchbar {
             background: linear-gradient(90deg, #0d3e7a 0%, #1565c0 50%, #0097a7 100%);
             padding: 0.75rem 2rem;
@@ -92,7 +189,6 @@
             border-radius: 30px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            border: none;
         }
         .searchbar-input {
             flex: 1;
@@ -122,16 +218,27 @@
             font-size: 1rem;
             cursor: pointer;
             transition: background 0.2s;
-            font-weight: 700;
-            letter-spacing: 0.5px;
         }
         .searchbar-btn:hover { background: #e65100; }
+
         .searchbar-right {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-left: auto;
         }
+        .searchbar-support {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 0.4rem 0.9rem;
+        }
+        .searchbar-support .support-icon { font-size: 1.6rem; color: #80deea; }
+        .searchbar-support .support-label { font-size: 0.62rem; color: #80deea; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+        .searchbar-support .support-phone { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
+
         .searchbar-icon-group {
             display: flex;
             flex-direction: column;
@@ -146,7 +253,6 @@
         }
         .searchbar-icon-group:hover { color: #fff; transform: translateY(-1px); }
         .searchbar-icon-group .icon {
-            font-size: 1.4rem;
             position: relative;
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
@@ -156,6 +262,7 @@
             align-items: center;
             justify-content: center;
             transition: background 0.2s;
+            font-size: 1.15rem;
         }
         .searchbar-icon-group:hover .icon { background: rgba(255,255,255,0.2); }
         .searchbar-count {
@@ -164,7 +271,7 @@
             right: -4px;
             background: var(--accent);
             color: #fff;
-            font-size: 0.6rem;
+            font-size: 0.58rem;
             font-weight: 700;
             border-radius: 50%;
             width: 17px;
@@ -174,28 +281,9 @@
             justify-content: center;
             border: 2px solid #1565c0;
         }
-        .searchbar-support {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 0.4rem 0.9rem;
-        }
-        .searchbar-support .support-icon { font-size: 1.8rem; color: #80deea; }
-        .searchbar-support .support-label { font-size: 0.62rem; color: #80deea; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
-        .searchbar-support .support-phone { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
 
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1.2rem;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
+        /* ── Buttons ── */
+        .btn { display: inline-block; padding: 0.5rem 1.2rem; border-radius: 6px; font-weight: 600; font-size: 0.9rem; cursor: pointer; border: none; transition: all 0.2s; }
         .btn-primary   { background: var(--blue); color: #fff; }
         .btn-primary:hover { background: var(--blue-dark); }
         .btn-accent    { background: var(--accent); color: #fff; }
@@ -206,13 +294,7 @@
         .btn-sm        { padding: 0.35rem 0.85rem; font-size: 0.82rem; }
 
         /* ── Alerts ── */
-        .alert {
-            padding: 0.85rem 1.2rem;
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-size: 0.9rem;
-            border-left: 4px solid;
-        }
+        .alert { padding: 0.85rem 1.2rem; border-radius: 8px; margin-bottom: 1rem; font-size: 0.9rem; border-left: 4px solid; }
         .alert-success { background: #e8f5e9; border-color: var(--success); color: var(--success); }
         .alert-error   { background: #ffebee; border-color: var(--danger);  color: var(--danger); }
         .alert-info    { background: #e3f2fd; border-color: var(--blue);    color: var(--blue); }
@@ -222,19 +304,8 @@
         .page-content { padding: 2rem 0; }
 
         /* ── Cards ── */
-        .card {
-            background: #fff;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-            overflow: hidden;
-        }
-        .card-header {
-            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
-            color: #fff;
-            padding: 1rem 1.5rem;
-            font-size: 1rem;
-            font-weight: 600;
-        }
+        .card { background: #fff; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.07); overflow: hidden; }
+        .card-header { background: linear-gradient(135deg, var(--blue-dark), var(--blue)); color: #fff; padding: 1rem 1.5rem; font-size: 1rem; font-weight: 600; }
         .card-body { padding: 1.5rem; }
 
         /* ── Table ── */
@@ -244,14 +315,7 @@
         tr:hover td { background: #f9fbff; }
 
         /* ── Badge ── */
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.65rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: capitalize;
-        }
+        .badge { display: inline-block; padding: 0.25rem 0.65rem; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: capitalize; }
         .badge-success  { background: #e8f5e9; color: #2e7d32; }
         .badge-danger   { background: #ffebee; color: #c62828; }
         .badge-warning  { background: #fff3e0; color: #e65100; }
@@ -259,89 +323,12 @@
         .badge-primary  { background: #e8eaf6; color: #283593; }
         .badge-secondary{ background: #f5f5f5; color: #616161; }
 
-        /* ── LAYER 1: Top Bar ── */
-        .topbar {
-            background: #111;
-            color: rgba(255,255,255,0.75);
-            font-size: 0.78rem;
-            padding: 0 2rem;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #222;
-        }
-        .topbar-left {
-            display: flex;
-            align-items: center;
-        }
-        .topbar-left a, .topbar-right a {
-            color: rgba(255,255,255,0.7);
-            transition: color 0.2s;
-            padding: 0 1rem;
-            border-right: 1px solid #333;
-            line-height: 36px;
-        }
-        .topbar-left a:first-child { padding-left: 0; }
-        .topbar-left a:hover, .topbar-right a:hover { color: #fff; }
-        .topbar-location {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: rgba(255,255,255,0.9);
-            font-weight: 600;
-            padding: 0 1rem;
-            border-left: 1px solid #333;
-        }
-        .topbar-right {
-            display: flex;
-            align-items: center;
-        }
-        .topbar-right a {
-            border-right: none;
-            border-left: 1px solid #333;
-            padding: 0 1rem;
-            line-height: 36px;
-        }
-        .topbar-divider {
-            width: 1px;
-            height: 14px;
-            background: #333;
-        }
-
         /* ── Footer ── */
-        .footer-features {
-            background: var(--blue);
-            padding: 2rem;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-        .footer-feature {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            color: #fff;
-            max-width: 200px;
-        }
-        .footer-feature-icon {
-            font-size: 2rem;
-            flex-shrink: 0;
-            opacity: 0.9;
-        }
-        .footer-feature-title {
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.2rem;
-        }
-        .footer-feature-sub {
-            font-size: 0.78rem;
-            opacity: 0.8;
-        }
+        .footer-features { background: var(--blue); padding: 2rem; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1.5rem; margin-top: 3rem; }
+        .footer-feature  { display: flex; align-items: flex-start; gap: 1rem; color: #fff; max-width: 200px; }
+        .footer-feature-icon  { font-size: 2rem; flex-shrink: 0; opacity: 0.9; }
+        .footer-feature-title { font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.2rem; }
+        .footer-feature-sub   { font-size: 0.78rem; opacity: 0.8; }
 
         .footer-main {
             background: #fff;
@@ -351,104 +338,73 @@
             gap: 2rem;
             border-top: 1px solid #eee;
         }
-        .footer-col h4 {
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #111;
-            margin-bottom: 1rem;
-        }
+        .footer-col h4 { font-size: 0.82rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #111; margin-bottom: 1rem; }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 0.55rem; }
-        .footer-col ul li a {
-            font-size: 0.83rem;
-            color: #555;
-            transition: color 0.2s;
-        }
+        .footer-col ul li a { font-size: 0.83rem; color: #555; transition: color 0.2s; }
         .footer-col ul li a:hover { color: var(--blue); }
 
-        .footer-mpesa {
-            background: #1a7a2e;
-            color: #fff;
-            padding: 0.6rem 1rem;
-            border-radius: 6px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 0.5rem;
-        }
-        .footer-till {
-            display: flex;
-            gap: 4px;
-            margin-bottom: 1.2rem;
-        }
-        .footer-till span {
-            border: 2px solid #333;
-            border-radius: 4px;
-            width: 30px;
-            height: 34px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #111;
-        }
-        .footer-contact-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 0.75rem;
-        }
-        .footer-contact-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            font-size: 0.83rem;
-            color: #444;
-            margin-bottom: 0.5rem;
-        }
+        .footer-mpesa { background: #1a7a2e; color: #fff; padding: 0.6rem 1rem; border-radius: 6px; font-weight: 700; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 0.5rem; }
+        .footer-till  { display: flex; gap: 4px; margin-bottom: 1.2rem; }
+        .footer-till span { border: 2px solid #333; border-radius: 4px; width: 30px; height: 34px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; color: #111; }
+
+        .footer-contact-title { font-size: 1rem; font-weight: 700; color: #111; margin-bottom: 0.75rem; }
+        .footer-contact-item  { display: flex; align-items: flex-start; gap: 8px; font-size: 0.83rem; color: #444; margin-bottom: 0.5rem; }
         .footer-contact-item strong { color: #111; }
 
-        .footer-bottom {
-            background: #f5f5f5;
-            text-align: center;
-            padding: 0.85rem;
-            font-size: 0.78rem;
-            color: #777;
-            border-top: 1px solid #ddd;
-        }
+        .footer-bottom { background: #f5f5f5; text-align: center; padding: 0.85rem; font-size: 0.78rem; color: #777; border-top: 1px solid #ddd; }
         .footer-bottom a { color: var(--blue); }
     </style>
     <?php echo $__env->yieldContent('styles'); ?>
 </head>
 <body>
 
-<!-- ══ LAYER 1: Top Info Bar ══ -->
+<!-- ══════════════════════════════════════════
+     LAYER 1: Top Info Bar
+══════════════════════════════════════════ -->
 <div class="topbar">
     <div class="topbar-left">
-        <a href="<?php echo e(route('repairs.create')); ?>">📞 Contact Us</a>
-        <a href="#">FAQs</a>
-        <div class="topbar-location">📍 Gaberon Plaza, NRB CBD, 4th Floor Shop No. A19</div>
+        <a href="<?php echo e(route('repairs.create')); ?>">
+            <i class="fa-solid fa-phone"></i> Contact Us
+        </a>
+        <a href="#">
+            <i class="fa-regular fa-circle-question"></i> FAQs
+        </a>
+        <div class="topbar-location">
+            <i class="fa-solid fa-location-dot"></i>
+            Gaberon Plaza, NRB CBD, 4th Floor Shop No. A19
+        </div>
     </div>
     <div class="topbar-right">
         <?php if(auth()->guard()->check()): ?>
-            <a href="<?php echo e(route('orders.index')); ?>">My Orders</a>
+            <a href="<?php echo e(route('orders.index')); ?>">
+                <i class="fa-solid fa-box"></i> My Orders
+            </a>
             <form action="<?php echo e(route('logout')); ?>" method="POST" style="display:inline;">
                 <?php echo csrf_field(); ?>
-                <button type="submit" style="background:none;border:none;color:rgba(255,255,255,0.7);cursor:pointer;font-size:0.78rem;padding:0 1rem;border-left:1px solid #333;height:36px;">Logout</button>
+                <button type="submit" class="logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i> Logout
+                </button>
             </form>
         <?php else: ?>
-            <a href="<?php echo e(route('login')); ?>">Login</a>
-            <a href="<?php echo e(route('register')); ?>">Register</a>
+            <a href="<?php echo e(route('login')); ?>">
+                <i class="fa-regular fa-user"></i> Login / Register
+            </a>
         <?php endif; ?>
+        <!-- Social Icons -->
+        <div class="topbar-social">
+            <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" title="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" title="Pinterest"><i class="fa-brands fa-pinterest-p"></i></a>
+            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
     </div>
 </div>
 
-<!-- ══ LAYER 2: Brand + Main Nav ══ -->
+<!-- ══════════════════════════════════════════
+     LAYER 2: Brand + Main Nav
+══════════════════════════════════════════ -->
 <nav class="navbar">
     <a href="<?php echo e(route('home')); ?>" class="navbar-brand">
         <img src="<?php echo e(asset('images/logo.png')); ?>" alt="Jerann Traders Logo">
@@ -461,19 +417,25 @@
     <div class="nav-links">
         <a href="<?php echo e(route('home')); ?>"           class="nav-link <?php echo e(request()->routeIs('home') ? 'active' : ''); ?>">Home</a>
         <a href="<?php echo e(route('products.index')); ?>" class="nav-link <?php echo e(request()->routeIs('products*') ? 'active' : ''); ?>">Shop</a>
-        <a href="<?php echo e(route('repairs.create')); ?>" class="nav-link <?php echo e(request()->routeIs('repairs*') ? 'active' : ''); ?>">About Us</a>
+        <a href="<?php echo e(route('repairs.create')); ?>" class="nav-link <?php echo e(request()->routeIs('about*') ? 'active' : ''); ?>">About Us</a>
+        <a href="#"                             class="nav-link <?php echo e(request()->routeIs('blog*') ? 'active' : ''); ?>">Blog</a>
         <a href="<?php echo e(route('repairs.create')); ?>" class="nav-link">Contact Us</a>
         <a href="<?php echo e(route('repairs.create')); ?>" class="nav-link nav-link-highlight">Request For Quotation</a>
         <a href="<?php echo e(route('repairs.create')); ?>" class="nav-link">Request For Service</a>
+
         <?php if(auth()->guard()->check()): ?>
             <?php if(auth()->user()->isAdmin()): ?>
-                <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-link" style="color:#ffd54f;">⚙ Admin</a>
+                <a href="<?php echo e(route('admin.dashboard')); ?>" class="nav-link" style="color:#ffd54f;">
+                    <i class="fa-solid fa-gear"></i> Admin
+                </a>
             <?php endif; ?>
         <?php endif; ?>
     </div>
 </nav>
 
-<!-- ══ LAYER 3: Search Bar ══ -->
+<!-- ══════════════════════════════════════════
+     LAYER 3: Search Bar
+══════════════════════════════════════════ -->
 <div class="searchbar">
     <form class="searchbar-form" action="<?php echo e(route('products.index')); ?>" method="GET">
         <input type="text" name="search" class="searchbar-input"
@@ -481,46 +443,73 @@
                value="<?php echo e(request('search')); ?>">
         <select name="category" class="searchbar-select">
             <option value="">Select Category</option>
-            <option value="printers"     <?php echo e(request('category') == 'printers'     ? 'selected' : ''); ?>>Printers</option>
-            <option value="laptops"      <?php echo e(request('category') == 'laptops'      ? 'selected' : ''); ?>>Laptops</option>
-            <option value="tablets"      <?php echo e(request('category') == 'tablets'      ? 'selected' : ''); ?>>Tablets</option>
-            <option value="inks"         <?php echo e(request('category') == 'inks'         ? 'selected' : ''); ?>>Toner & Inks</option>
-            <option value="accessories"  <?php echo e(request('category') == 'accessories'  ? 'selected' : ''); ?>>Accessories</option>
+            <option value="printers"    <?php echo e(request('category') == 'printers'    ? 'selected' : ''); ?>>Printers</option>
+            <option value="laptops"     <?php echo e(request('category') == 'laptops'     ? 'selected' : ''); ?>>Laptops</option>
+            <option value="tablets"     <?php echo e(request('category') == 'tablets'     ? 'selected' : ''); ?>>Tablets</option>
+            <option value="inks"        <?php echo e(request('category') == 'inks'        ? 'selected' : ''); ?>>Toner & Inks</option>
+            <option value="accessories" <?php echo e(request('category') == 'accessories' ? 'selected' : ''); ?>>Accessories</option>
         </select>
-        <button type="submit" class="searchbar-btn">🔍</button>
+        <button type="submit" class="searchbar-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
     </form>
 
     <div class="searchbar-right">
-        <!-- Support -->
+        <!-- 24/7 Support -->
         <div class="searchbar-support">
-            <span class="support-icon">📲</span>
+            <i class="fa-solid fa-headset support-icon"></i>
             <div>
                 <div class="support-label">24/7 Support</div>
                 <div class="support-phone">0702 939 491</div>
             </div>
         </div>
 
+        <!-- Compare -->
+        <a href="#" class="searchbar-icon-group">
+            <div class="icon">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span class="searchbar-count">0</span>
+            </div>
+            <span>Compare</span>
+        </a>
+
         <!-- Wishlist -->
         <a href="#" class="searchbar-icon-group">
-            <div class="icon">♡<span class="searchbar-count">0</span></div>
+            <div class="icon">
+                <i class="fa-regular fa-heart"></i>
+                <span class="searchbar-count">0</span>
+            </div>
             <span>Wishlist</span>
         </a>
 
         <!-- Cart -->
-        <?php $cartCount = auth()->check() ? \App\Models\CartItem::where('user_id', auth()->id())->sum('quantity') : 0; ?>
+        <?php
+            $cartCount = auth()->check()
+                ? \App\Models\CartItem::where('user_id', auth()->id())->sum('quantity')
+                : 0;
+            $cartTotal = auth()->check()
+                ? \App\Models\CartItem::where('user_id', auth()->id())
+                    ->join('products','cart_items.product_id','=','products.id')
+                    ->sum(\Illuminate\Support\Facades\DB::raw('cart_items.quantity * products.price'))
+                : 0;
+        ?>
         <a href="<?php echo e(auth()->check() ? route('cart.index') : route('login')); ?>" class="searchbar-icon-group">
-            <div class="icon">🛒<span class="searchbar-count"><?php echo e($cartCount); ?></span></div>
-            <span>KSH <?php echo e(auth()->check() ? number_format(\App\Models\CartItem::where('user_id', auth()->id())->join('products','cart_items.product_id','=','products.id')->sum(\Illuminate\Support\Facades\DB::raw('cart_items.quantity * products.price'))) : '0'); ?></span>
+            <div class="icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="searchbar-count"><?php echo e($cartCount); ?></span>
+            </div>
+            <span>KSH <?php echo e(number_format($cartTotal)); ?></span>
         </a>
     </div>
 </div>
 
+<!-- ══ Page Content ══ -->
 <div class="container page-content">
     <?php if(session('success')): ?>
-        <div class="alert alert-success">✅ <?php echo e(session('success')); ?></div>
+        <div class="alert alert-success"><i class="fa-solid fa-circle-check"></i> <?php echo e(session('success')); ?></div>
     <?php endif; ?>
     <?php if(session('error')): ?>
-        <div class="alert alert-error">❌ <?php echo e(session('error')); ?></div>
+        <div class="alert alert-error"><i class="fa-solid fa-circle-xmark"></i> <?php echo e(session('error')); ?></div>
     <?php endif; ?>
 
     <?php echo $__env->yieldContent('content'); ?>
@@ -529,35 +518,35 @@
 <!-- ── Footer Features Bar ── -->
 <div class="footer-features">
     <div class="footer-feature">
-        <div class="footer-feature-icon">🚚</div>
+        <div class="footer-feature-icon"><i class="fa-solid fa-truck-fast"></i></div>
         <div>
             <div class="footer-feature-title">Countrywide Delivery</div>
             <div class="footer-feature-sub">We dispatch immediately</div>
         </div>
     </div>
     <div class="footer-feature">
-        <div class="footer-feature-icon">🔒</div>
+        <div class="footer-feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
         <div>
             <div class="footer-feature-title">Secure Payment</div>
             <div class="footer-feature-sub">100% Secure</div>
         </div>
     </div>
     <div class="footer-feature">
-        <div class="footer-feature-icon">🎧</div>
+        <div class="footer-feature-icon"><i class="fa-solid fa-headset"></i></div>
         <div>
             <div class="footer-feature-title">24/7 Support</div>
             <div class="footer-feature-sub">Unlimited help desk</div>
         </div>
     </div>
     <div class="footer-feature">
-        <div class="footer-feature-icon">✅</div>
+        <div class="footer-feature-icon"><i class="fa-solid fa-circle-check"></i></div>
         <div>
             <div class="footer-feature-title">100% Safe</div>
             <div class="footer-feature-sub">View our benefits</div>
         </div>
     </div>
     <div class="footer-feature">
-        <div class="footer-feature-icon">📦</div>
+        <div class="footer-feature-icon"><i class="fa-solid fa-box-open"></i></div>
         <div>
             <div class="footer-feature-title">Free Returns</div>
             <div class="footer-feature-sub">Track or cancel orders</div>
@@ -628,17 +617,18 @@
         </div>
 
         <div class="footer-contact-title">Get In Touch</div>
+        <div class="footer-contact-item"><strong>Jerann Trade Ltd</strong></div>
         <div class="footer-contact-item">
-            <strong>Jerann Trade Ltd</strong>
+            <i class="fa-solid fa-location-dot" style="color:var(--blue);margin-top:2px;"></i>
+            Gaberon Plaza, NRB CBD, 4th Floor Shop No. A19
         </div>
         <div class="footer-contact-item">
-            📍 Gaberon Plaza, NRB CBD, 4th Floor Shop No. A19
+            <i class="fa-solid fa-phone" style="color:var(--blue);margin-top:2px;"></i>
+            <a href="tel:0702939491" style="color:var(--blue);">0702 939 491</a>
         </div>
         <div class="footer-contact-item">
-            📞 <a href="tel:0702939491" style="color:var(--blue);">0702 939 491</a>
-        </div>
-        <div class="footer-contact-item">
-            ✉️ <a href="mailto:info@jeranntraders.com" style="color:var(--blue);">info@jeranntraders.com</a>
+            <i class="fa-solid fa-envelope" style="color:var(--blue);margin-top:2px;"></i>
+            <a href="mailto:info@jeranntraders.com" style="color:var(--blue);">info@jeranntraders.com</a>
         </div>
     </div>
 </div>
