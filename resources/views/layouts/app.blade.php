@@ -203,99 +203,105 @@
            LAYER 3: Search Bar
         ════════════════════════════════════ */
         .searchbar {
-            background: linear-gradient(90deg, #0d3e7a 0%, #1565c0 50%, #0097a7 100%);
-            padding: 0.75rem 2rem;
+            background: #111111;
+            padding: 0 2rem;
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 0;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+            height: 60px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.4);
         }
         .searchbar-form {
             display: flex;
             flex: 1;
-            max-width: 700px;
-            border-radius: 30px;
+            max-width: 680px;
+            border-radius: 0;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: none;
+            border: none;
         }
         .searchbar-input {
             flex: 1;
-            padding: 0.7rem 1.2rem;
+            padding: 0 1.2rem;
             border: none;
             outline: none;
             font-size: 0.9rem;
             background: #fff;
             color: #333;
+            height: 44px;
         }
         .searchbar-select {
-            padding: 0.7rem 1rem;
+            padding: 0 1rem;
             border: none;
-            border-left: 1px solid #e0e0e0;
+            border-left: 1px solid #ddd;
             outline: none;
             font-size: 0.82rem;
-            background: #f8f8f8;
+            background: #f5f5f5;
             color: #444;
             cursor: pointer;
             min-width: 160px;
+            height: 44px;
         }
         .searchbar-btn {
-            background: var(--accent);
+            background: var(--blue);
             color: #fff;
             border: none;
             padding: 0 1.4rem;
             font-size: 1rem;
             cursor: pointer;
             transition: background 0.2s;
+            height: 44px;
+            width: 48px;
         }
-        .searchbar-btn:hover { background: #e65100; }
+        .searchbar-btn:hover { background: var(--blue-dark); }
 
         .searchbar-right {
             display: flex;
             align-items: center;
-            gap: 1.5rem;
+            gap: 1.8rem;
             margin-left: auto;
         }
         .searchbar-support {
             display: flex;
             align-items: center;
             gap: 10px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 0.4rem 0.9rem;
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
         }
-        .searchbar-support .support-icon { font-size: 1.6rem; color: #80deea; }
-        .searchbar-support .support-label { font-size: 0.62rem; color: #80deea; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
-        .searchbar-support .support-phone { font-size: 0.92rem; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
+        .searchbar-support .support-icon { font-size: 1.8rem; color: var(--blue); }
+        .searchbar-support .support-label { font-size: 0.62rem; color: var(--blue); font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; }
+        .searchbar-support .support-phone { font-size: 0.95rem; font-weight: 800; color: #fff; letter-spacing: 0.3px; }
 
         .searchbar-icon-group {
             display: flex;
             flex-direction: column;
             align-items: center;
             position: relative;
-            color: rgba(255,255,255,0.9);
-            font-size: 0.7rem;
-            gap: 3px;
+            color: rgba(255,255,255,0.85);
+            font-size: 0.68rem;
+            gap: 2px;
             cursor: pointer;
-            transition: color 0.2s, transform 0.2s;
+            transition: color 0.2s;
             text-decoration: none;
         }
-        .searchbar-icon-group:hover { color: #fff; transform: translateY(-1px); }
+        .searchbar-icon-group:hover { color: #fff; }
         .searchbar-icon-group .icon {
             position: relative;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            background: transparent;
+            border-radius: 0;
+            width: 32px;
+            height: 32px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background 0.2s;
-            font-size: 1.15rem;
+            font-size: 1.3rem;
+            color: #fff;
         }
-        .searchbar-icon-group:hover .icon { background: rgba(255,255,255,0.2); }
+        .searchbar-icon-group:hover .icon { color: var(--blue); }
         .searchbar-count {
             position: absolute;
             top: -4px;
@@ -310,7 +316,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #1565c0;
+            border: 2px solid #111111;
         }
 
         /* ── Buttons ── */
